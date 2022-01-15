@@ -17,6 +17,8 @@ const auth = firebase.auth();
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorText, setErrorText] = useState("");
+
   const login = () => {
     Keyboard.dismiss();
     auth
@@ -27,7 +29,7 @@ export default function LoginScreen({ navigation }) {
       })
       .catch((error) => {
         console.log("ERROR");
-        // setErrorText(error.message)
+        setErrorText(error.message);
       });
   };
 
@@ -58,6 +60,7 @@ export default function LoginScreen({ navigation }) {
         <TouchableOpacity onPress={login} style={styles.loginButton}>
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
+        <Text style={styles.errorText}>{errorText}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
